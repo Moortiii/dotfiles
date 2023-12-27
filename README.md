@@ -21,12 +21,12 @@ The setup is developed for Ubuntu 22.04 using i3-wm, currently at version 4.22 (
 
 **Where to put the various files**:
 
-i3/config -> $HOME/.config/i3/config
-i3blocks/config -> $HOME/.config/i3blocks/config
-i3blocks-components/* -> /usr/share/i3blocks/*
-picom/picom.conf -> $HOME/.config/picom.conf
-wallpaper -> $HOME/Pictures/wallpaper.png
-scripts/* -> $HOME/scripts
+* `i3/config` -> `$HOME/.config/i3/config`
+* `i3blocks/config` -> `$HOME/.config/i3blocks/config`
+* `i3blocks-components/*` -> `/usr/share/i3blocks/*`
+* `picom/picom.conf` -> `$HOME/.config/picom.conf`
+* `wallpaper` -> `$HOME/Pictures/wallpaper.png`
+* `scripts/*` -> `$HOME/scripts`
 
 **Locking the screen**:
 
