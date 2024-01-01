@@ -9,6 +9,9 @@
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
     ];
+  
+  # Tell NixOS that it is running in a Virtual Machine
+  virtualisation.vmware.guest.enable = true;
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -128,6 +131,8 @@
   environment.systemPackages = with pkgs; [
     arandr
     firefox
+    picom
+    (import ../../scripts/lock.nix { inherit pkgs; })
   ];
 
   programs.bash.shellAliases = {

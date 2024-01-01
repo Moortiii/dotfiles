@@ -5,6 +5,7 @@
 
   imports = [
     ../../modules/home-manager/git.nix
+    ../../modules/home-manager/picom/picom.nix
     ../../modules/home-manager/i3/i3.nix
     ../../modules/home-manager/i3blocks/i3blocks.nix
   ];
@@ -18,6 +19,9 @@
     discord
     vscode
     eww
+    htop
+    ranger
+    spotify
   ];
 
   # Let Home Manager install and manage itself.

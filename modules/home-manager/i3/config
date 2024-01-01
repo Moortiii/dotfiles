@@ -214,6 +214,5 @@ bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#D66200' -sf '#0
 bindsym $mod+Shift+s exec "gnome-screenshot -i"
 
 exec --no-startup-id picom -b
-exec --no-startup-id nitrogen --restore
 
 bindsym $mod+l exec --no-startup-id /home/mha/scripts/lock.sh
