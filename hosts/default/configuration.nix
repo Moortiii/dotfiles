@@ -16,11 +16,6 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "hakkeboksen"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -48,25 +43,36 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.desktopManager.xterm.enable = true;
 
-  # Enable i3
-  services.xserver.windowManager.i3.enable = false;
-
-  # Add additional packages to i3
-  services.xserver.windowManager.i3.extraPackages = with pkgs; [
-    dmenu
-    i3status
-    i3lock
-    i3blocks
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
 
-  # Set default display session
-  #services.xserver.displayManager.defaultSession = "none+i3";
-
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  services.xserver = {
+    # environment.pathsToLink = [ "/libexec" ];
+
+    desktopManager = {
+      xterm.enable = false;
+    };
+   
+    displayManager = {
+        defaultSession = "none+i3";
+    };
+
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        dmenu
+        i3status
+        i3lock
+        i3blocks
+     ];
+    };
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -107,6 +113,11 @@
     };
   };
 
+  # Configure environment variables
+  environment.sessionVariables = rec {
+    TERM = "alacritty";
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -114,10 +125,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     arandr
-    discord
-    vscode
-    kitty
-    gnome.gnome-terminal
     firefox
   ];
 

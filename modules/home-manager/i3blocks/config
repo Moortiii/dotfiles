@@ -1,0 +1,35 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+
+# Global properties
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/share/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+# Volume indicator
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+[volume]
+instance=Master
+interval=1
+signal=10
+command=./components/volume
+
+# Battery indicator
+[battery]
+command=./components/battery
+interval=10
+
+# Date Time
+[date]
+command=echo " $(LC_ALL=de_DE.utf8 date '+%b %d')"
+interval=5
+
+[time]
+command=echo " $(date '+%H:%M:%S')"
+interval=5
