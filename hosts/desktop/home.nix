@@ -17,6 +17,7 @@
     alacritty
     discord
     vscode
+    eww
   ];
 
   # Let Home Manager install and manage itself.

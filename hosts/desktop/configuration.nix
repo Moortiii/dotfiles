@@ -45,6 +45,7 @@
   services.xserver.enable = true;
 
   fonts.packages = with pkgs; [
+    font-awesome
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
 
@@ -52,11 +53,12 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
-  services.xserver = {
-    # environment.pathsToLink = [ "/libexec" ];
+  security.pam.services.sudo.nodelay = true;
 
+  services.xserver = {
     desktopManager = {
       xterm.enable = false;
+      wallpaper.mode = "scale";
     };
    
     displayManager = {
@@ -128,6 +130,10 @@
     firefox
   ];
 
+  programs.bash.shellAliases = {
+    s = "git status";
+  };
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
