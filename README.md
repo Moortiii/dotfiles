@@ -11,8 +11,6 @@ sudo nixos-rebuild --flake ./dotfiles#desktop
 # TODO:
 
 * Automatically set up Firefox with settings (no password saving) + default extensions
-* Configure VSCode Key Bindings
-* Configure VSCode default extensions and configuration
 * Configure ewwbar
 * Configure i3lock
 * Remove failing i3blocks

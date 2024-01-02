@@ -60,13 +60,21 @@
 
   services.xserver = {
     desktopManager = {
-      xterm.enable = false;
       wallpaper.mode = "scale";
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
     };
    
-    displayManager = {
-        defaultSession = "none+i3";
-    };
+    # i3 for Window Management, XFCE for Desktop management
+    displayManager.defaultSession = "xfce";
+
+    # Configure keymap in X11
+    layout = "no";
+    xkbVariant = "";
 
     windowManager.i3 = {
       enable = true;
@@ -79,11 +87,7 @@
     };
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "no";
-    xkbVariant = "";
-  };
+  
 
   # Configure console keymap
   console.keyMap = "no";
