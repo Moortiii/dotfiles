@@ -16,6 +16,4 @@ sudo nixos-rebuild --flake ./dotfiles#desktop
 * Remove failing i3blocks
 * Configure wallpaper
 * Set up default folders, maybe download a given set of repositories immediately, e.g. advent of code?
-* Pyenv setup
-* Poetry setup
 * How does Pants work with all of this?

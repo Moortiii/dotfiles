@@ -16,12 +16,13 @@
   # Enable Docker
   virtualisation.docker.enable = true;
 
-  # Bootloader.
+  # Bootloader
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
-
-  networking.hostName = "hakkeboksen"; # Define your hostname.
+  
+  # Define hostname
+  networking.hostName = "hakkeboksen"; 
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -36,15 +37,15 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
+    LC_ADDRESS = "nb_NO.UTF-8";
+    LC_IDENTIFICATION = "nb_NO.UTF-8";
+    LC_MEASUREMENT = "nb_NO.UTF-8";
+    LC_MONETARY = "nb_NO.UTF-8";
+    LC_NAME = "nb_NO.UTF-8";
+    LC_NUMERIC = "nb_NO.UTF-8";
+    LC_PAPER = "nb_NO.UTF-8";
+    LC_TELEPHONE = "nb_NO.UTF-8";
+    LC_TIME = "nb_NO.UTF-8";
   };
 
   # Enable the X11 windowing system.
@@ -55,25 +56,17 @@
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
 
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
+  # Disable delay on failed authentication attempts for sudo
   security.pam.services.sudo.nodelay = true;
 
   services.xserver = {
     desktopManager = {
       wallpaper.mode = "scale";
       xterm.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
     };
    
-    # i3 for Window Management, XFCE for Desktop management
-    displayManager.defaultSession = "xfce";
+    # i3 for Window Management
+    displayManager.defaultSession = "none+i3";
 
     # Configure keymap in X11
     layout = "no";
@@ -89,8 +82,6 @@
      ];
     };
   };
-
-  
 
   # Configure console keymap
   console.keyMap = "no";
@@ -109,7 +100,7 @@
     pulse.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define user accounts - set password with ‘passwd’.
   users.users.mha = {
     isNormalUser = true;
     description = "Morten Hauge";

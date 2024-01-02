@@ -22,6 +22,9 @@
     htop
     ranger
     spotify
+    poetry
+    libgcc
+    python312
   ];
 
   # Let Home Manager install and manage itself.

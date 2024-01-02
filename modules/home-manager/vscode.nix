@@ -7,6 +7,7 @@
       "editor.formatOnSave" = true;
       "workbench.iconTheme" = "material-icon-theme";
       "workbench.colorTheme" ="One Dark Pro";
+      "window.zoomLevel" = 1;
       "[python]" = {
         "editor.rulers" = [88];
         "editor.formatOnSave" = true;
