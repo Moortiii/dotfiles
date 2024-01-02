@@ -13,6 +13,9 @@
   # Tell NixOS that it is running in a Virtual Machine
   virtualisation.vmware.guest.enable = true;
 
+  # Enable Docker
+  virtualisation.docker.enable = true;
+
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -110,7 +113,7 @@
   users.users.mha = {
     isNormalUser = true;
     description = "Morten Hauge";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     ];
   };

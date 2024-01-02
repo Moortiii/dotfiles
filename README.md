@@ -18,6 +18,4 @@ sudo nixos-rebuild --flake ./dotfiles#desktop
 * Set up default folders, maybe download a given set of repositories immediately, e.g. advent of code?
 * Pyenv setup
 * Poetry setup
-* Docker setup
 * How does Pants work with all of this?
-* Picom with transparency for inactive applications and terminals
