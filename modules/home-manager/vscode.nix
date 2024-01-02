@@ -10,6 +10,7 @@
       "[python]" = {
         "editor.rulers" = [88];
         "editor.formatOnSave" = true;
+        "editor.defaultFormatter" = "charliermarsh.ruff";
       };
     };
     keybindings = [
