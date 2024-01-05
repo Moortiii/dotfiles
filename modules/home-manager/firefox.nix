@@ -8,7 +8,11 @@
         settings = {
           "browser.startup.homepage" = "google.no";
         };
-        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [ ublock-origin bitwarden ]; 
+        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+            ublock-origin
+            bitwarden
+            reddit-enhancement-suite
+        ]; 
       };
     };
   };

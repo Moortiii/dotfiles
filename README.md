@@ -10,7 +10,6 @@ sudo nixos-rebuild --flake ./dotfiles#desktop
 
 # TODO:
 
-* Automatically set up Firefox with settings (no password saving) + default extensions
 * Configure ewwbar
 * Configure i3lock
 * Remove failing i3blocks
