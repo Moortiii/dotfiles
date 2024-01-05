@@ -18,18 +18,19 @@ markup=none
 instance=Master
 interval=1
 signal=10
-command=./components/volume
+command=$HOME/.config/i3blocks/components/volume
 
 # Battery indicator
 [battery]
-command=./components/battery
+command=$HOME/.config/i3blocks/components/battery
 interval=10
-
-# Date Time
-[date]
-command=echo " $(LC_ALL=de_DE.utf8 date '+%b %d')"
-interval=5
 
 [time]
 command=echo " $(date '+%H:%M:%S')"
+interval=1
+
+# Date Time
+[date]
+command=echo " $(LC_ALL=de_DE.utf8 date '+%b %d') "
 interval=5
+

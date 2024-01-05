@@ -10,6 +10,12 @@
       inputs.home-manager.nixosModules.default
     ];
   
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+  ];
+
   # Tell NixOS that it is running in a Virtual Machine
   virtualisation.vmware.guest.enable = true;
 
@@ -50,7 +56,8 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  environment.pathsToLink = [ "/libexec" ];
+  
   fonts.packages = with pkgs; [
     font-awesome
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
@@ -111,6 +118,8 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
+    useUserPackages = true;
     users = {
       "mha" = import ./home.nix;
     };
