@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
-
+let
+  gitaware = builtins.fetchGit {
+    url = "https://github.com/jimeh/git-aware-prompt";
+    ref = "master";
+    rev = "df8f218d4af51b1fac03f58bf0ddc776466312de";
+  };
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -32,6 +38,14 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.bash = {
+    enable = true;
+    bashrcExtra = ''
+      export GITAWAREPROMPT=${gitaware.outPath}
+      source ${gitaware.outPath}/main.sh
+      export PS1="\[\]\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\[\033[0m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ ";
+    '';
+  };
   # programs.firefox = {
   #   enable = true;
   #   profiles = {
