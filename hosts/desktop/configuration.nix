@@ -9,12 +9,6 @@
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
     ];
-  
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
 
   # Tell NixOS that it is running in a Virtual Machine
   virtualisation.vmware.guest.enable = true;
@@ -144,6 +138,7 @@
 
   programs.bash.shellAliases = {
     s = "git status";
+    xclip = "xclip -selection clipboard";
   };
   
   # Some programs need SUID wrappers, can be configured further or are

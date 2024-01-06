@@ -9,13 +9,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # TODO: Add nix-autobahn to system packages
+    nix-autobahn = builtins.fetchGit {
+      url = "https://github.com/Lassulus/nix-autobahn";
+      ref = "master";
+      rev = "9122088c5d58ca86b26ee4eda9ce6745f2c9555e";
+    };
+    
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nix-ld, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -26,6 +38,9 @@
           modules = [ 
             ./hosts/desktop/configuration.nix
             inputs.home-manager.nixosModules.default
+
+            nix-ld.nixosModules.nix-ld
+            { programs.nix-ld.dev.enable = true; }
           ];
         };
     };

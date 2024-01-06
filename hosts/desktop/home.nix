@@ -18,16 +18,19 @@
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
-    alacritty
-    discord
     eww
-    htop
-    ranger
-    spotify
-    poetry
-    python312
+    btop
     dunst # Notification Daemon
+    xclip
+    ranger
+    poetry
+    discord
+    spotify
+    alacritty
+    python312
     libnotify # Library to send Notifications
+    imagemagick
+    gnome.gnome-screenshot
   ];
 
   # Let Home Manager install and manage itself.

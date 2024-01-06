@@ -211,8 +211,7 @@ bar {
 }
 
 bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#D66200' -sf '#000000' -fn 'monospace-10' -p 'Run: '"
-bindsym $mod+Shift+s exec "gnome-screenshot -i"
+bindsym $mod+Shift+s exec --no-startup-id "gnome-screenshot -i"
+bindsym $mod+l exec --no-startup-id i3-custom-lock
 
 exec --no-startup-id picom -b
-
-bindsym $mod+l exec --no-startup-id /home/mha/scripts/lock.sh
