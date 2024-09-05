@@ -7,9 +7,24 @@
 
 # i3 config file (v4)
 #
+
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
+
+# Reduce screen brightness
+#bindsym $mod+Shift+o exec --no-startup-id "redshift -O 5000"
+
+# Restore screen brightness
+bindsym $mod+Control+o exec --no-startup-id "redshift -x"
+
+# Lock screen
+bindsym $mod+l exec --no-startup-id i3lock
+
+# Change screen configuration
+bindsym $mod+shift+n exec --no-startup-id /home/mha/scripts/alt-home.sh
+bindsym $mod+shift+m exec --no-startup-id /home/mha/scripts/home.sh
+bindsym $mod+Shift+h exec --no-startup-id /home/mha/scripts/laptop.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -28,47 +43,41 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/mha/scripts/lock.sh -- --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+exec --no-startup-id eval `ssh-agent -s`
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -USR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q -D pulse sset Master 5%+ unmute && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q -D pulse sset Master 5%- unmute && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id amixer -q -D pulse sset Master toggle && $refresh_i3status
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# move tiling windows via drag & drop by left-clicking into the title bar,
-# or left-clicking anywhere into the window while holding the floating modifier.
-tiling_drag modifier titlebar
-
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+
+# take a screenshot
+bindsym $mod+Shift+s exec --no-startup-id "gnome-screenshot -i"
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
-# gaps
-gaps inner 15
-gaps outer 5
-
-# alternatively, you can use the cursor keys:
+# change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -183,37 +192,64 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# class                 border  bground text    indicator child_border
-client.focused          #D66200 #D66200 #000000 #2E9EF4   #285577
-client.focused_inactive #333333 #4A4A4A #FFFFFF #484E50   #5F676A
-client.unfocused        #333333 #222222 #888888 #292D2E   #222222
-client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
-client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
 
+# class                 border  bground text    indicator child_border
+client.focused          #FF7D08 #FF7D08 #000000 #2E9EF4   #285577
+client.focused_inactive #222222 #222222 #FFFFFF #484E50   #5F676A
+client.unfocused        #222222 #222222 #888888 #292D2E   #222222
+client.urgent           #900000 #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
 bar {
-  status_command i3blocks
-
+  status_command i3status
+  position top
   colors {
     background #000000
     statusline #FFFFFF
     separator  #666666
 
-    focused_workspace  #D66200 #D66200 #000000
+    focused_workspace  #FF7D08 #FF7D08 #000000
     active_workspace   #333333 #222222 #FFFFFF
     inactive_workspace #333333 #222222 #888888
     urgent_workspace   #2F343A #900000 #FFFFFF
     binding_mode       #2F343A #900000 #FFFFFF
   }
-
-  position top
 }
 
-bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#D66200' -sf '#000000' -fn 'monospace-10' -p 'Run: '"
-bindsym $mod+Shift+s exec "gnome-screenshot -i"
+mode "swap" {
+	# switch to workspace
+	bindsym $mod+1 workspace $ws1
+	bindsym $mod+2 workspace $ws2
+	bindsym $mod+3 workspace $ws3
+	bindsym $mod+4 workspace $ws4
+	bindsym $mod+5 workspace $ws5
+	bindsym $mod+6 workspace $ws6
+	bindsym $mod+7 workspace $ws7
+	bindsym $mod+8 workspace $ws8
+	bindsym $mod+9 workspace $ws9
+	bindsym $mod+0 workspace $ws10
 
-exec --no-startup-id picom -b
-exec --no-startup-id nitrogen --restore
+	# change focus
+	bindsym $mod+Left focus left
+	bindsym $mod+Down focus down
+	bindsym $mod+Up focus up
+	bindsym $mod+Right focus right
 
-bindsym $mod+l exec --no-startup-id /home/mha/scripts/lock.sh
+	# change focus (without mod)
+	bindsym Left focus left
+	bindsym Down focus down
+	bindsym Up focus up
+	bindsym Right focus right
+
+	bindsym Return swap container with mark "swapee"; unmark "swapee"; mode "default";
+	bindsym Escape unmark "swapee"; mode "default";
+}
+
+bindsym $mod+Shift+i mark --add "swapee"; mode "swap"
+bindsym $mod+Shift+b exec "i3_balance_workspace"
+bindsym $mod+Tab focus right
+bindsym $mod+Shift+Tab focus left
+bindsym $mod+Ctrl+Tab workspace back_and_forth 
